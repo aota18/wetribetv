@@ -7,6 +7,12 @@ import UrlList from "../components/UrlList";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  const sendDataToReactNativeApp = async () => {
+    window.ReactNativeWebView.postMessage(
+      "Hello from Webview to React Native 🙋‍♂️"
+    );
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,6 +23,18 @@ export default function Home() {
       <Script src="https://cdn.tailwindcss.com"></Script>
 
       <main className={styles.main}>
+        <button
+          style={{
+            padding: 20,
+            width: 200,
+            fontSize: 20,
+            color: "white",
+            backgroundColor: "#6751ff",
+          }}
+          onClick={() => sendDataToReactNativeApp()}
+        >
+          RN Test
+        </button>
         <div className="w-full text-3xl font-bold text-indigo-500 p-4 rounded-md my-8">
           Voice of Coding Videos
         </div>
