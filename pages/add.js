@@ -6,7 +6,7 @@ const Add = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <div className="text-3xl font-light text-gray-500 p-4 rounded-md">
+        <div className="w-full my-8 text-3xl font-light text-gray-500 p-4 rounded-md">
           Add your new video URL 🎬
         </div>
         <AddUrl />

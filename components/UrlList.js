@@ -6,6 +6,7 @@ import {
   query,
   startAt,
   endAt,
+  where,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { FaSearch, FaChevronRight } from "react-icons/fa";
@@ -41,6 +42,7 @@ const UrlList = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const parseVideoId = (url) => {
+    console.log(url);
     const parseUrl = url.split("?");
 
     const parsedQuery = parseUrl[1].split("&");
@@ -51,23 +53,15 @@ const UrlList = () => {
   };
 
   const onSelectCategories = (e) => {
-    console.log(e.target.value);
+    setSelectedCategory(e.target.value);
   };
 
   const onChangeKeyword = (e) => {
-    console.log(e.taret.value);
+    setKeyword(e.target.value);
   };
 
   // Fetch Categories of videos
   useEffect(() => {
-    setIsLoading(true);
-
-    // let q;
-    // if (selectedCategory === "All") {
-    //   q = query(collectionRef, where());
-    // } else {
-    //   q = query(collectionRef, where("title", startAt));
-    // }
     const q = query(collectionRef, orderBy("timestamp", "desc"));
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -76,16 +70,36 @@ const UrlList = () => {
       setCategories(
         resultArr.filter((item, pos) => resultArr.indexOf(item) == pos)
       );
-      setIsLoading(false);
     });
-
     return unsubscribe;
   }, []);
 
   // Fetch Videos on specific queries
   useEffect(() => {
     setIsLoading(true);
-    const q = query(collectionRef, orderBy("timestamp", "desc"));
+    let q;
+    if (selectedCategory === "All") {
+      if (!keyword) {
+        q = query(collectionRef, orderBy("timestamp", "desc"));
+      } else {
+        q = query(
+          collectionRef,
+          where("title", ">=", keyword),
+          where("title", "<=", keyword + "\uf88f")
+        );
+      }
+    } else {
+      if (!keyword || keyword === "") {
+        q = query(collectionRef, where("category", "==", selectedCategory));
+      } else {
+        q = query(
+          collectionRef,
+          where("category", "==", selectedCategory),
+          where("title", ">=", keyword),
+          where("title", "<=", keyword + "\uf88f")
+        );
+      }
+    }
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       setUrls(
@@ -98,7 +112,11 @@ const UrlList = () => {
     });
     setIsLoading(false);
     return unsubscribe;
-  }, []);
+  }, [keyword, selectedCategory]);
+
+  const onClickVideo = (link) => {
+    location.href = link;
+  };
 
   if (isLoading) {
     return (
@@ -110,9 +128,9 @@ const UrlList = () => {
 
   return (
     <>
-      <div className="flex w-full items-center bg-gray-100 rounded-md px-2">
+      <div className="flex w-full h-full items-center bg-gray-100 rounded-md mb-4">
         <select
-          className="w-24 h-12 bg-gray-100 "
+          className="w-24 h-12 bg-gray-100 px-2"
           onChange={onSelectCategories}
         >
           <option>All</option>
@@ -126,15 +144,24 @@ const UrlList = () => {
           type="text"
           placeholder="Seach Videos..."
           onChange={onChangeKeyword}
+          value={keyword}
           className="ml-4 px-2 w-full h-12 bg-gray-100"
         />
-        <FaSearch className="ml-4 text-gray-600 text-xl" />
+        <FaSearch className="mx-4 text-gray-600 text-xl" />
       </div>
       {isLoading ? (
         <LoadingSkeleton />
+      ) : urls.length === 0 ? (
+        <div className="my-4 text-lg text-gray-500">
+          No results with keyword "{keyword}"
+        </div>
       ) : (
         urls.map((url) => (
-          <div className="flex justify-between my-8 w-full" key={url.id}>
+          <div
+            className="flex justify-between py-4 w-full cursor-pointer hover:bg-gray-100 focus:bg-gray-200"
+            onClick={() => onClickVideo(url.url)}
+            key={url.id}
+          >
             <img
               src={`https://img.youtube.com/vi/${parseVideoId(
                 url.url

@@ -34,7 +34,7 @@ const AddUrl = () => {
           className="border border-indigo-500 p-3 text-lg rounded-md focus:ring-indigo-500"
           type="text"
           name="title"
-          {...register("title")}
+          {...register("title", { required: true, maxLength: 20 })}
         />
       </div>
 
@@ -44,7 +44,7 @@ const AddUrl = () => {
           className="border border-indigo-500 p-3 text-lg rounded-md focus:ring-indigo-500"
           type="text"
           name="category"
-          {...register("category")}
+          {...register("category", { required: true, maxLength: 20 })}
         />
       </div>
 
@@ -54,12 +54,18 @@ const AddUrl = () => {
           className="border border-indigo-500 p-3 text-lg rounded-md focus:ring-indigo-500"
           type="text"
           name="url"
-          {...register("url")}
+          {...register("url", {
+            required: true,
+            pattern: `https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)`,
+          })}
         />
       </div>
 
       <div className="my-8">
-        <div onClick={() => router.push("/")}className="text-center my-2 w-full border border-red-300 p-3 text-lg rounded-md bg-red-500 text-white">
+        <div
+          onClick={() => router.push("/")}
+          className="text-center my-2 w-full border border-red-300 p-3 text-lg rounded-md bg-red-500 text-white"
+        >
           Cancel
         </div>
         <button className="my-2 w-full border border-indigo-500 p-3 text-lg rounded-md bg-indigo-500 text-white">
