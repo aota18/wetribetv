@@ -153,7 +153,8 @@ const UrlList = () => {
         <LoadingSkeleton />
       ) : urls.length === 0 ? (
         <div className="my-4 text-lg text-gray-500">
-          No results with keyword "{keyword}"
+          {" "}
+          No results with keyword {keyword}
         </div>
       ) : (
         urls.map((url) => (
