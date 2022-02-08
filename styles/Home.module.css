@@ -1,11 +1,12 @@
 .container {
-  padding: 0 2rem;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 .main {
+  width: 100%;
   min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+  padding: 0rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -108,9 +109,42 @@
   margin-left: 0.5rem;
 }
 
-@media (max-width: 600px) {
-  .grid {
+.fabContainer {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.fabButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3f51b5;
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background: #3f51b5;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 36px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: 0.3s;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.fabButton:focus {
+  transform: scale(1.1);
+  transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+/* @media (max-width: 600px) {
+  .container {
     width: 100%;
     flex-direction: column;
   }
-}
+} */
