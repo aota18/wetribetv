@@ -7,7 +7,9 @@ import Layout from "../../components/users/Layout";
 import Link from "../../components/Link";
 import { userService } from "../../services/user.service";
 import { alertService } from "../../services/alert.service";
+import { useState } from "react/cjs/react.development";
 const Login = () => {
+  const [res, setRes] = useState("");
   const router = useRouter();
 
   // form validation rules
@@ -47,6 +49,7 @@ const Login = () => {
 
     // HANDLE DATA
     console.log(type, data);
+    setRes(data);
   }
 
   useEffect(() => {
@@ -106,6 +109,8 @@ const Login = () => {
                 Login with Wetribe
               </div>
             </div>
+
+            {JSON.stringify(res)}
           </form>
         </div>
       </div>
