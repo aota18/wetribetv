@@ -1,10 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import Script from "next/script";
 import FabButton from "../components/FabButton";
 import UrlList from "../components/UrlList";
 import styles from "../styles/Home.module.css";
+import Link from "../components/Link";
+import { userService } from "../services/user.service";
 
 export default function Home() {
   const sendDataToReactNativeApp = async () => {
@@ -22,20 +23,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        {/* <button
-          style={{
-            padding: 20,
-            width: 200,
-            fontSize: 20,
-            color: "white",
-            backgroundColor: "#6751ff",
-          }}
-          onClick={() => sendDataToReactNativeApp()}
-        >
-          RN Test
-        </button> */}
-        <div className="w-full text-3xl font-bold text-indigo-500 p-4 rounded-md my-8">
-          Voice of Coding Videos
+        <div className="w-full text-center text-3xl text-black p-4 rounded-md my-8">
+          Search your Videos
         </div>
         <UrlList />
       </main>
@@ -59,3 +48,17 @@ export default function Home() {
     </div>
   );
 }
+
+// export default function Home() {
+//   return (
+//     <div className="p-4">
+//       <div className="container">
+//         <h1>Hi {userService.userValue?.firstName}!</h1>
+//         <p>You&apos;re logged in with Next.js & JWT!!</p>
+//         <p>
+//           <Link href="/users">Manage Users</Link>
+//         </p>
+//       </div>
+//     </div>
+//   );
+// }
