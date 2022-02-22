@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { useForm } from "react-hook-form";
@@ -7,7 +7,6 @@ import Layout from "../../components/users/Layout";
 import Link from "../../components/Link";
 import { userService } from "../../services/user.service";
 import { alertService } from "../../services/alert.service";
-import { useState } from "react/cjs/react.development";
 const Login = () => {
   const [res, setRes] = useState("");
   const router = useRouter();
