@@ -1,11 +1,11 @@
 [
     {
-        "firstName": "Daniel",
-        "lastName": "Seo",
-        "username": "sanggwf",
-        "hash": "$2a$10$aA/1Wr6JTCidigCMJDopHe5j9F58ja8hR54.bd74UqneG23RnCWi6",
-        "id": 3,
-        "dateCreated": "2022-02-22T11:49:11.629Z",
-        "dateUpdated": "2022-02-22T11:49:11.629Z"
+        "firstName": "test",
+        "lastName": "test",
+        "username": "test",
+        "hash": "$2a$10$tRqvq47z4MIXsO6stkd0SeOe9/L6cPKL47mH42ZxH/ITJ8wtbPD1y",
+        "id": 1,
+        "dateCreated": "2022-02-23T02:58:49.581Z",
+        "dateUpdated": "2022-02-23T02:58:49.581Z"
     }
 ]

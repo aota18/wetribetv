@@ -24,9 +24,9 @@ const Nav = () => {
         <NavLink href="/" exact className="nav-item nav-link">
           Home
         </NavLink>
-        {/* <NavLink href="/users" className="nav-item nav-link">
+        <NavLink href="/users" className="nav-item nav-link">
           Users
-        </NavLink> */}
+        </NavLink>
         <a onClick={logout} className="nav-item nav-link cursor-pointer">
           Logout
         </a>

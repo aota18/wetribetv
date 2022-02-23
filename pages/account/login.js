@@ -101,15 +101,13 @@ const Login = () => {
               <Link href="/account/register" className="btn btn-primary mt-2">
                 Register
               </Link>
-              <div
+              {/* <div
                 onClick={() => onLoginWithWetribe()}
                 className="text-center text-gray-700 border mt-2 rounded-lg py-2"
               >
                 Login with Wetribe
-              </div>
+              </div> */}
             </div>
-
-            {JSON.stringify(res)}
           </form>
         </div>
       </div>
