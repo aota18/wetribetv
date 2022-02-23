@@ -59,7 +59,7 @@ function MyApp({ Component, pageProps }) {
       <div className={`app-container ${user ? "bg-light" : ""}`}>
         <Nav />
         <Alert />
-        {authorized && <Component {...pageProps} />}
+        {true && <Component {...pageProps} />}
       </div>
     </>
   );
