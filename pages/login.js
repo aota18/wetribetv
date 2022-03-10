@@ -1,7 +1,7 @@
 import styles from "../styles/Home.module.css";
 import { FaKey } from "react-icons/fa";
 const url = "http://develop.wetribe.io/login/oauth";
-const appId = "1646729472967002b1a95ee34a4b91ba24d4d7a0f8c41e3d";
+const appId = "16467379610030032b3e8323c05d808cfa218696d1ca29c7";
 
 const Login = () => {
   return (
