@@ -32,7 +32,7 @@ const LoadingSkeleton = () => {
   );
 };
 
-const UrlList = () => {
+const UrlList = ({ userId }) => {
   const collectionRef = collection(db, "urls");
 
   const [urls, setUrls] = useState([]);
@@ -42,7 +42,6 @@ const UrlList = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const parseVideoId = (url) => {
-    console.log(url);
     const parseUrl = url.split("?");
 
     const parsedQuery = parseUrl[1].split("&");
@@ -76,24 +75,35 @@ const UrlList = () => {
 
   // Fetch Videos on specific queries
   useEffect(() => {
+    console.log("===USERID===", typeof userId);
     setIsLoading(true);
     let q;
     if (selectedCategory === "All") {
       if (!keyword) {
-        q = query(collectionRef, orderBy("timestamp", "desc"));
+        q = query(
+          collectionRef,
+          where("creatorId", "==", parseInt(userId)),
+          orderBy("timestamp", "desc")
+        );
       } else {
         q = query(
           collectionRef,
+          where("creatorId", "==", parseInt(userId)),
           where("title", ">=", keyword),
           where("title", "<=", keyword + "\uf88f")
         );
       }
     } else {
       if (!keyword || keyword === "") {
-        q = query(collectionRef, where("category", "==", selectedCategory));
+        q = query(
+          collectionRef,
+          where("creatorId", "==", parseInt(userId)),
+          where("category", "==", selectedCategory)
+        );
       } else {
         q = query(
           collectionRef,
+          where("creatorId", "==", parseInt(userId)),
           where("category", "==", selectedCategory),
           where("title", ">=", keyword),
           where("title", "<=", keyword + "\uf88f")
@@ -171,7 +181,7 @@ const UrlList = () => {
             />
             <div className="flex flex-col justify-center items-start w-full ml-4">
               <div className="text-lg ">{url.title}</div>
-              <div className="my-2 text-xs ">by Daniel Seo</div>
+              <div className="my-2 text-xs ">by {url.creator}</div>
               <div className="my-2 text-sm text-gray-500">
                 {moment(url.timestamp).format("MM/DD/YYYY")}
               </div>

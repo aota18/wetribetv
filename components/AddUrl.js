@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import {
   collection,
@@ -11,7 +11,7 @@ import { db } from "../utils/firebase";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 
-const AddUrl = () => {
+const AddUrl = ({ user }) => {
   const router = useRouter();
   const urlDocRef = doc(collection(db, "urls"));
   const { register, handleSubmit } = useForm();
@@ -19,6 +19,8 @@ const AddUrl = () => {
 
   const onSubmit = async (values) => {
     await setDoc(urlDocRef, {
+      creatorId: user.id,
+      creator: user.nickname,
       title: values.title,
       category: values.category,
       url: values.url,
