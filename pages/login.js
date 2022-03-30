@@ -4,7 +4,7 @@ import Image from "next/image";
 import LogoImg from "../public/logo.png";
 
 const url = "http://develop.wetribe.io/login/oauth";
-const appId = "1648626974591011940f87953dab0888ee577b65f94acd22";
+const appId = "1648626974591003181194bd37869c0aa118228d4be0885d";
 
 const Login = () => {
   return (
