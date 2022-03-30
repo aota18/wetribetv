@@ -7,8 +7,7 @@ const LoadingScreen = () => {
   return <div>Loading...</div>;
 };
 
-const baseURL =
-  "http://android.local.frontmono.com:8080//napi/latest/auth/user/info/current";
+const baseURL = "http://develop.wetribe.io/napi/latest/auth/user/info/current";
 
 const getUserInfo = (token) => {
   const response = fetch(`${baseURL}?jtoken=${token}`);
