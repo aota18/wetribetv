@@ -8,13 +8,13 @@ const CreateAsExtension = () => {
   const { isAuthenticated, user } = useAuth();
   const { extVersionId, domain } = router.query;
 
+  console.log(user);
   const URL = {
-    LOCAL: `http://android.local.frontmono.com:8080/tools/create`,
-    DEV: `http://develop.wetribe.io/tools/create`,
-    PROD: `https://wetribe.us/tools/create`,
+    LOCAL: `http://android.local.frontmono.com:8080/extension/tools/create`,
+    DEV: `http://develop.wetribe.io/extension/tools/create`,
+    PROD: `http://wetribe.us/extension/tools/create`,
   };
 
-  const wetribeURL = `http://develop.wetribe.io/extension/tools/create`;
   const appURL = user ? `https://wetribetv.vercel.app/users/${user.id}` : "";
 
   useEffect(() => {

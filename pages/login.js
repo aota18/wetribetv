@@ -6,10 +6,9 @@ import LogoImg from "../public/logo.png";
 const URL = {
   LOCAL: `http://android.local.frontmono.com:8080/login/oauth`,
   DEV: `http://develop.wetribe.io/login/oauth`,
-  PROD: `https://wetribe.us/login/oauth`,
+  PROD: `http://wetribe.us/login/oauth`,
 };
 
-const url = "http://develop.wetribe.io/login/oauth";
 const appId = "164863312037900282181457df21a92b411baf2837e18524";
 
 const Login = () => {
