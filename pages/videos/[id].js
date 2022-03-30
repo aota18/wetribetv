@@ -9,7 +9,6 @@ const Video = () => {
   return (
     <div>
       {id}
-      {JSON.stringify(user)}
     </div>
   );
 };

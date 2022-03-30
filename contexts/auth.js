@@ -7,7 +7,8 @@ const LoadingScreen = () => {
   return <div>Loading...</div>;
 };
 
-const baseURL = "http://develop.wetribe.io/napi/latest/auth/user/info/current";
+const baseURL =
+  "http://android.local.frontmono.com:8080//napi/latest/auth/user/info/current";
 
 const getUserInfo = (token) => {
   const response = fetch(`${baseURL}?jtoken=${token}`);
@@ -18,38 +19,35 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log("useeffect");
-    async function loadUserFromCookies() {
-      const token = Cookies.get("jtoken");
-      console.log(token);
-      if (token) {
-        console.log("herllo");
-        try {
-          const result = await getUserInfo(token);
-
-          const { code, data } = result;
-
-          console.log(code, data);
-          setUser(data);
-          console.log("Got user");
-        } catch (e) {
-          console.log(e);
-        }
-      }
-      setIsLoading(false);
-    }
-
-    loadUserFromCookies();
+    checkSession();
   }, []);
 
+  const checkSession = async () => {
+    setIsLoading(true);
+    const token = Cookies.get("jtoken");
+
+    if (token) {
+      try {
+        const result = await getUserInfo(token);
+        console.log(result);
+        const { code, data } = result;
+
+        setUser(data);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    setIsLoading(false);
+  };
+
   const logout = async () => {
-    Cookies.remove("jwt");
+    Cookies.remove("jtoken");
     setUser(null);
   };
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, isLoading, logout }}
+      value={{ isAuthenticated: !!user, user, isLoading, logout, checkSession }}
     >
       {children}
     </AuthContext.Provider>

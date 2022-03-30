@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import FabButton from "../../components/FabButton";
 import UrlList from "../../components/UrlList";
 import styles from "../../styles/Home.module.css";
@@ -14,7 +15,6 @@ import { useAuth } from "contexts/auth";
 const UserVideo = () => {
   const router = useRouter();
   const { id } = router.query;
-  console.log("===ID===", id);
 
   const { isAuthenticated, isLoading, user, logout } = useAuth();
 
@@ -40,6 +40,11 @@ const UserVideo = () => {
     console.log("share with wetribe");
   };
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthenticated]);
   return (
     <div>
       <nav className="absolute p-2">
