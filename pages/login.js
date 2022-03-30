@@ -3,8 +3,14 @@ import { FaKey } from "react-icons/fa";
 import Image from "next/image";
 import LogoImg from "../public/logo.png";
 
+const URL = {
+  LOCAL: `http://android.local.frontmono.com:8080/login/oauth`,
+  DEV: `http://develop.wetribe.io/login/oauth`,
+  PROD: `https://wetribe.us/login/oauth`,
+};
+
 const url = "http://develop.wetribe.io/login/oauth";
-const appId = "1648626974591003181194bd37869c0aa118228d4be0885d";
+const appId = "164863312037900282181457df21a92b411baf2837e18524";
 
 const Login = () => {
   return (
@@ -23,7 +29,7 @@ const Login = () => {
           <button
             className="flex items-center bg-black shadow-md text-white py-2 px-4 text-lg font-light"
             onClick={() => {
-              window.location.href = `${url}?appId=${appId}`;
+              window.location.href = `${URL.PROD}?appId=${appId}`;
             }}
           >
             <FaKey className="mr-4" />

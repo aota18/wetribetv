@@ -8,6 +8,12 @@ const CreateAsExtension = () => {
   const { isAuthenticated, user } = useAuth();
   const { extVersionId, domain } = router.query;
 
+  const URL = {
+    LOCAL: `http://android.local.frontmono.com:8080/tools/create`,
+    DEV: `http://develop.wetribe.io/tools/create`,
+    PROD: `https://wetribe.us/tools/create`,
+  };
+
   const wetribeURL = `http://develop.wetribe.io/extension/tools/create`;
   const appURL = user ? `https://wetribetv.vercel.app/users/${user.id}` : "";
 
@@ -18,7 +24,7 @@ const CreateAsExtension = () => {
   }, [isAuthenticated]);
 
   const onClickContinue = () => {
-    window.location.href = `${wetribeURL}?appURL=${appURL}&extVersionId=${extVersionId}&domain=${domain}`;
+    window.location.href = `${URL.PROD}?appURL=${appURL}&extVersionId=${extVersionId}&domain=${domain}`;
   };
 
   return (
