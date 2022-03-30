@@ -5,21 +5,20 @@ import { useAuth } from "contexts/auth";
 
 const Callback = ({ jtoken, redirectUrl }) => {
   const router = useRouter();
-  const { isAuthenticated, isLoading, user, logout, checkSession } = useAuth();
+  const { isAuthenticated, user, logout, checkSession } = useAuth();
 
   useEffect(() => {
     Cookies.set("jtoken", jtoken);
 
     checkSession();
-    if (!isLoading && isAuthenticated) {
-      console.log(redirectUrl);
+    if (isAuthenticated) {
       if (redirectUrl) {
         router.push(redirectUrl);
       } else {
         router.push(`/users/${user.id}`);
       }
     }
-  }, [isAuthenticated, isLoading]);
+  }, [isAuthenticated]);
   return <div>Callback page</div>;
 };
 

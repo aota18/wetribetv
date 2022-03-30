@@ -15,14 +15,12 @@ const getUserInfo = (token) => {
 };
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     checkSession();
   }, []);
 
   const checkSession = async () => {
-    setIsLoading(true);
     const token = Cookies.get("jtoken");
 
     if (token) {
@@ -36,7 +34,6 @@ export const AuthProvider = ({ children }) => {
         console.log(e);
       }
     }
-    setIsLoading(false);
   };
 
   const logout = async () => {
@@ -46,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated: !!user, user, isLoading, logout, checkSession }}
+      value={{ isAuthenticated: !!user, user, logout, checkSession }}
     >
       {children}
     </AuthContext.Provider>
